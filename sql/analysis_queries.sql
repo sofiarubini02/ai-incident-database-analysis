@@ -37,7 +37,8 @@ where media_morti > 0;
 -- 6) Child victims and deployers          
 select victims, deployer
 from MORTI_IA m, GEOGRAFIA_IA g
-where m.incident = g.incident and victims like '%child%' or '%children%’;
+where m.incident = g.incident
+  and (victims like '%child%' or victims like '%children%');
 
 -- 6.1) Child Sexual Exploitation Victims- Deployer, Incident, and Description:
 select sottoquery3.incident, victims, deployer, description
