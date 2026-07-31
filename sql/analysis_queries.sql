@@ -37,7 +37,7 @@ where media_morti > 0;
 -- 6) Child victims and deployers          
 select victims, deployer
 from MORTI_IA m, GEOGRAFIA_IA g
-where m.incident = g.incident and victims like '%child%' or '%children%’
+where m.incident = g.incident and victims like '%child%' or '%children%’;
 
 -- 6.1) Child Sexual Exploitation Victims- Deployer, Incident, and Description:
 select sottoquery3.incident, victims, deployer, description
@@ -52,7 +52,7 @@ select description, incident
 from INCIDENTI_IA_1
 where description like '%porn%') as sottoquery on MORTI_IA.incident = sottoquery.incident) as sottoquery1
 where victims like '%child%' or '%children%') as sottoquery2 join GEOGRAFIA_IA  g on g.incident = sottoquery2.incident) as sottoquery3  join
-INCIDENTI_IA_1 i on sottoquery3.incident = i.incident
+INCIDENTI_IA_1 i on sottoquery3.incident = i.incident;
 
 -- 7) US vs China incident frequency by year:       
 select sottoquery1.anno, US, China
@@ -64,7 +64,7 @@ left join
 from INCIDENTI_IA_1 i join GEOGRAFIA_IA g on i.incident=g.incident and country='China'
 group by anno) as sottoquery2 on
 sottoquery1.anno=sottoquery2.anno
-order by anno
+order by anno;
 
 -- 8) Discrimination Category Analysis- Focus on Women, Black People, People with Disabilities, and Jewish People:    
 select tot_discrimination, against_women, against_black, against_disable, against_jewish
@@ -108,12 +108,12 @@ from (
 select incident
 from CATEGORIE_IA c join INCIDENTI_IA_1 i on c.title=i.title and classification= 'discrimination') as sottoquery5
 join MORTI_IA m on m.incident=sottoquery5.incident) as sottoquery6
-where victims like '%jewish%') as sottoquery11
+where victims like '%jewish%') as sottoquery11;
 
 -- 9) Deepfake-related incidents: 
 select incident, description
 from INCIDENTI_IA_1
-where description like '%deepfake%'
+where description like '%deepfake%';
 
 -- 9.1) Deepfake Category Analysis- Percentage of Sexual, Fraudulent, and Political Manipulation Crimes:
 select
@@ -138,7 +138,7 @@ from INCIDENTI_IA_1
 where description like '%deepfake%') as sottoquery5 where description like '%fraud%') as sottoquery6,
 (
 select count(incident) as political_interference      
-from CATEGORIE_IA c join INCIDENTI_IA_1 i on c.title=i.title and description like '%deepfake%' and classification like '%political manipulation%') as sottoquery7
+from CATEGORIE_IA c join INCIDENTI_IA_1 i on c.title=i.title and description like '%deepfake%' and classification like '%political manipulation%') as sottoquery7;
 
 -- 10) Most frequent incident category by year:
 select sottoquery3.anno, classification, CONCAT(FORMAT((maxfreq / tot_incidenti) * 100, 2), '%') AS classification_percentage, maxfreq, tot_incidenti
@@ -157,7 +157,7 @@ WHERE classifica = 1
 ) as sottoquery2
 join 
 (
-select year (date) as anno, count(date) as tot_incidenti
+select year (date) as anno, count(date) as tot_incidenti;
 from INCIDENTI_IA_1
 group by anno
 order by anno) as sottoquery3
