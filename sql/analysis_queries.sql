@@ -157,8 +157,8 @@ WHERE classifica = 1
 ) as sottoquery2
 join 
 (
-select year (date) as anno, count(date) as tot_incidenti;
+select year (date) as anno, count(date) as tot_incidenti
 from INCIDENTI_IA_1
 group by anno
 order by anno) as sottoquery3
-on sottoquery2.anno= sottoquery3.anno
+on sottoquery2.anno= sottoquery3.anno;
