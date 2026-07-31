@@ -26,10 +26,6 @@ group by country
 order by frequenza_incidenti DESC
 limit 3;
 
-
-
-
-
 -- 5) Average number of deaths by country:
 select country, media_morti
 from (
@@ -43,7 +39,7 @@ select victims, deployer
 from MORTI_IA m, GEOGRAFIA_IA g
 where m.incident = g.incident and victims like '%child%' or '%children%’
 
--- 6.1) -- 6.1) Child Sexual Exploitation Victims: Deployer, Incident, and Description
+-- 6.1) Child Sexual Exploitation Victims- Deployer, Incident, and Description:
 select sottoquery3.incident, victims, deployer, description
 from (
 select sottoquery2.incident, victims, deployer
@@ -70,7 +66,7 @@ group by anno) as sottoquery2 on
 sottoquery1.anno=sottoquery2.anno
 order by anno
 
--- 8) Discrimination Category Analysis: Focus on Women, Black People, People with Disabilities, and Jewish People    
+-- 8) Discrimination Category Analysis- Focus on Women, Black People, People with Disabilities, and Jewish People:    
 select tot_discrimination, against_women, against_black, against_disable, against_jewish
 from (
 select count(sottoquery1.incident) as tot_discrimination
@@ -119,7 +115,7 @@ select incident, description
 from INCIDENTI_IA_1
 where description like '%deepfake%'
 
--- 9.1) -- 9.1) Deepfake Category Analysis: Percentage of Sexual, Fraudulent, and Political Manipulation Crimes:
+-- 9.1) Deepfake Category Analysis- Percentage of Sexual, Fraudulent, and Political Manipulation Crimes:
 select
 totale_deepfake,
 CONCAT(FORMAT((sexual_offence / totale_deepfake) * 100, 2), '%') AS sexual_offence_percentage,
